@@ -1,0 +1,2 @@
+FROM dev-base:1.0
+RUN apk add build-base cmake gdb

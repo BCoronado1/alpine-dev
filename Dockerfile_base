@@ -1,0 +1,9 @@
+FROM alpine:3.18.4
+ARG USR
+ARG PASSWD
+RUN apk add bash openssh
+RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+RUN adduser -h /home/${USR} -s /bin/bash -D ${USR}
+RUN echo -n ${USR}:${PASSWD} | chpasswd
+RUN ssh-keygen -A
+CMD exec /usr/sbin/sshd -D
